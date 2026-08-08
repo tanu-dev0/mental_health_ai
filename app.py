@@ -1,19 +1,26 @@
+"""Lightweight CLI demo of the emotion classifier (no SHAP explanation).
+
+For the full explainable-AI dashboard, run: streamlit run dashboard.py
+"""
 from transformers import pipeline
 
-# 1. Load the 'Brain' (A model trained on 6 emotions)
-print("Loading the AI model... please wait.")
-classifier = pipeline("text-classification", model="bhadresh-savani/distilbert-base-uncased-emotion")
+from emotion_utils import MODEL_NAME
 
-# 2. Get user input
-user_text = input("\nDescribe how you are feeling today: ")
 
-# 3. Analyze
-result = classifier(user_text)
+def main():
+    print("Loading the AI model... please wait.")
+    classifier = pipeline("text-classification", model=MODEL_NAME)
 
-# 4. Show the result
-label = result[0]['label']
-score = result[0]['score']
+    user_text = input("\nDescribe how you are feeling today: ").strip()
+    if not user_text:
+        print("No input provided, exiting.")
+        return
 
-print(f"\n--- Analysis ---")
-print(f"Detected Emotion: {label.upper()}")
-print(f"Confidence: {score:.2%}")
+    result = classifier(user_text)[0]
+    print("\n--- Analysis ---")
+    print(f"Detected Emotion: {result['label'].upper()}")
+    print(f"Confidence: {result['score']:.2%}")
+
+
+if __name__ == "__main__":
+    main()

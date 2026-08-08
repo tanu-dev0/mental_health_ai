@@ -1,1 +1,35 @@
+# Virtual environment
 venv/
+env/
+.venv/
+
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Test / coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Streamlit secrets (never commit credentials)
+.streamlit/secrets.toml
+
+# Environment variables / credentials
+.env
+.env.*
+*.key
+*.pem
+
+# Editor / OS junk
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Leftover generated files
+*.pptx
+*.log
